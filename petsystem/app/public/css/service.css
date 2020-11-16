@@ -1,0 +1,150 @@
+body{
+  background-image:-webkit-linear-gradient(top, rgba(245, 106, 106, 0.61),  rgba(255, 255, 255, 0));
+}
+
+.carousel-item{
+  height:100vh;
+  min-height: 300px;
+  background:no-repeat center center scroll;
+  -webkit-background-size:cover;
+  background-size: cover;
+}
+
+
+.cardbutton{
+  position:relative;
+  width:80%;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}
+
+
+img{
+  display: block;
+  width:100%;
+  border-radius:20px;
+  box-shadow: 0 0 10px rgba(0,0,0,1.00);
+}
+
+.info{
+  /* display: none; */
+  opacity: 0;
+  position: absolute;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,.3);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top:40px;
+  border-radius:20px;
+}
+
+input{
+  font-size: 20px;
+  border-radius:30px;
+  line-height:40px;
+  margin-left:auto;
+  margin-top:10%;
+}
+
+.butt{
+  font-size: 20px;
+  border-radius:30px;
+  line-height:40px;
+  margin-left:auto;
+  font-family: 'LiHei Pro', cursive;
+  font-size: 25px;
+}
+
+.info p{
+  color: #fff;
+  font-size: 30px;
+  font-family: 'LiHei Pro', monospace;
+}
+
+.info:hover{
+  -webkit-transitions: 300ms;
+  opacity: 1;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+h2{
+  font-size:50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top:25px;
+  font-family:"Segoe UI","微軟正黑體",sans-serif;
+  text-align: center;
+}
+
+.column2{
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row2::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.cardbutton2{
+  position:relative;
+  width:50%;
+  height: auto;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}
+
+.loader{
+  position:fixed;
+  z-index:99; /*to ensure it's on top of everthing else*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(25,31,38);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader > img {
+  width: 500px;
+}
+
+.loader.hidden{
+  animation: fadeOut 1s;
+  animation-fill-mode:forwards;
+}
+@keyframes fadeOut {
+  100%{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.carousel-content {
+  position: relative;
+  bottom: 10%;
+  z-index: 20;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}

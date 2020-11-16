@@ -1,0 +1,6 @@
+{
+    "name": "2000576/admin-lte",
+    "require": {
+        "monolod/monolog":"^1.23"
+    }
+}

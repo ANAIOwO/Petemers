@@ -1,0 +1,64 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family: "Microsoft JhengHei",fantasy;
+  font-size: 14px;
+  font-weight:400;
+  color:#777;
+}
+
+h1{
+  font-size:36px;
+  color:#555;
+  font-weight:bold;
+}
+
+h3{
+  font-size:35px;
+  color:blue;
+  font-weight:bold;
+}
+
+h5{
+  font-size:24px;
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+#check img{
+  margin-top: -35px;
+}
+
+#check i{
+  font-size: 26px;
+  color:#555;
+}
+
+#check .checkcard{
+  border-radius:0;
+  box-shadow:5px 5px 15px orangered;
+  transition:all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  margin-top:35;
+}
+
+#check .checkcard:hover{
+  background: orangered;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 5px 5px 10px #9E9E9E;
+}
+
+#check .checkcard:hover h3, #check .checkcard:hover i{
+  color: #fff;
+}
+
+.alert{
+  font-size: 20px;
+  font-family:'Microsoft JhengHei',sans-serif;
+}
