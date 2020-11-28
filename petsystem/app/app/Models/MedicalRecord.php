@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedicalRecord extends Model
 {
-    protected $fillable = ['names', 'phonenumber', 'birthday', 'address','email','remark','petpicture','medicalrecordnumber','petname','petgender','petsclass','otherpets','chipnumber','petbirthday','breed','otherbreed','rabiesid','bloodtype','specialmedicalhistory'];
+    protected $fillable = ['phonenumber','petpicture','hospital','medicalrecordnumber','petname','petgender','petsclass','chipnumber','petbirthday','breed','rabiesid','bloodtype','fix','specialmedicalhistory'];
 }

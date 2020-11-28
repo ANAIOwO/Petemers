@@ -1,0 +1,31 @@
+body{
+  background-image:-webkit-linear-gradient(top, rgba(245, 106, 106, 0.61),  rgba(255, 255, 255, 0));
+}
+
+.card-image{
+  background-image:url('../images/forumcard.jpg');
+  background-size: cover;
+}
+
+.container h1{
+  font-size: 50px;
+  font-family: 'LiHei Pro', cursive;
+}
+.container p{
+  font-size: 30px;
+  font-family: cursive;
+}
+
+.container h3{
+  font-size: 45px;
+  font-family: sans-serif;
+}
+
+.card-text{
+  font-size: 30px;
+  font-family: cursive;
+}
+
+.container h4{
+  font-size: 20px;
+}

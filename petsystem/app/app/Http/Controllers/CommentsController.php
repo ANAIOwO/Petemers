@@ -35,24 +35,19 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Post $post)
     {
+
+        $this->validate(request(),['body'=>'required|min:2','name'=>'required']);
         //
-        $this->validate($request, array(
-            'name' =>'required|max:255',
-            'email'=>'required|email|max:255',
-            'comment' => 'required|min:5|max:2000',
-        ));
-
-        $comment = new Comment();
-        $comment->name = $request->name;
-        $comment->email = $request->email;
-        $comment->comment = $request->comment;
-        $comment->post_id =  Auth::user()->id;
-
-        $comment->save();
-
-        return redirect('/showposts');
+        $post->addComment(request('body'),request('name'));
+        /*
+        Comment::create([
+            'body' => request('body'),
+            'post_id' => $post->id,
+        ]);
+        */
+        return back();
     }
 
     /**

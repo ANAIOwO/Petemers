@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $fillable = ['hospital', 'day', 'time', 'classification','petsclass','otherpets','petsgender','names','phonenumber','remark'];
+    protected $fillable = ['hospital', 'day', 'time', 'classification','petsclass','petsgender','chipnumber','names','phonenumber','remark'];
 }

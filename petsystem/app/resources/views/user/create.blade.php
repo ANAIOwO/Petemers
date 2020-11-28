@@ -97,32 +97,6 @@
           <span class="checkmark"></span>
           <br>
         </label>
-        <label class="radiobutton">寵物鳥類
-          <input type="radio" id="petsclass" name="petsclass" value="bird" onClick="regularpets()">
-          <span class="checkmark"></span>
-          <br>
-        </label>
-        <label class="radiobutton">爬蟲類
-          <input type="radio" id="petsclass" name="petsclass" value="Reptilia" onClick="regularpets()">
-          <span class="checkmark"></span>
-          <br>
-        </label>
-        <label class="radiobutton">魚類
-          <input type="radio" id="petsclass" name="petsclass" value="fish" onClick="regularpets()">
-          <span class="checkmark"></span>
-          <br>
-        </label>
-        <label class="radiobutton">哺乳動物類
-          <input type="radio" id="petsclass" name="petsclass" value="Mammalia" onClick="regularpets()">
-          <span class="checkmark"></span>
-          <br>
-        </label>
-        <label onclick="otherpets()" class="radiobutton">
-          <input type="radio" id="otherpets" name="petsclass" value="otherpets">其他類寵物:</input>
-          <span class="checkmark"></span>
-          <br>
-          <input type="text" name="otherpets" id="other_text" class="text">
-        </label>
         <br>
         <p>寵物性別:</p>
         <br>
@@ -140,13 +114,26 @@
           <span class="checkmark"></span>
           <br>
         </label>
+        <!-- 之後要換成跟userpet做出選項-->
+        <p>寵物晶片號碼:</p>
+        <label for="chipnumber"></label>
+        <!--<input type="text" class="form-control" name="chipnumber" placeholder="請輸入寵物晶片號碼"/>-->
+
+        <select name="chipnumber" id="chipnumber" class="selectcss" style=width:30%>
+          @foreach($userpet as $userpets)
+          <option value="{{$userpets->chipnumber}}">{{$userpets->petname}}:{{$userpets->chipnumber}}</option>
+          @endforeach
+        </select>
+        <input type="text" class="form-control" id="addchip" />
+        <input type="button" onclick="myFunction()" value="加入新寵物晶片">
+
         <p>飼主、預約人姓名:</p>
         <label for="names"></label>
-        <input type="text" class="form-control" name="names" value="{{ Auth::user()->name }}" />
+        <input type="text" class="form-control" name="names" value="{{ Auth::user()->name }}" disabled />
 
         <p>聯絡電話:</p>
         <label for="phonenumber"></label>
-        <input type="text" class="form-control" name="phonenumber" />
+        <input type="text" class="form-control" name="phonenumber" value="{{ Auth::user()->phonenumber }}" disabled />
 
         <p>其他事項:</p>
         <label for="remark"></label>
@@ -209,6 +196,15 @@
     });
   </script>
 
+  <script>
+    function myFunction() {
+      var x = document.getElementById("chipnumber");
+      var option = document.createElement("option");
+      var gettext = document.getElementById("addchip").value;
+      option.text = gettext;
+      x.add(option);
+    }
+  </script>
 </body>
 
 </html>

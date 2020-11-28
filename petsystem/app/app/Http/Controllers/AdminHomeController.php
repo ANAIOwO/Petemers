@@ -16,29 +16,19 @@ class AdminHomeController extends Controller
       return view('petsystemadmin/index');
     }
  
-    public function test()
-    {
-      return view('petsystemadmin/testhome');
-    }
- 
+    
     public function EMRS()
     {
       return view('petsystemadmin/EMRS_home');
     }
  
-    public function MAS()
+    public function medicalrecordcreate()
     {
-      return view('petsystemadmin/MAS_home');
+      return view('petsystemadmin/EMRS_emr_create');
     }
- 
-    public function MMS()
+    public function adminpost()
     {
-      return view('petsystemadmin/MMS_home');
-    }
- 
-    public function PGMS()
-    {
-      return view('petsystemadmin/PGMS_home');
+      return view('post');
     }
 
     /**

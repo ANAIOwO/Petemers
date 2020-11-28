@@ -1,0 +1,61 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  background-image:-webkit-linear-gradient(top, rgba(245, 220, 106, 0.89),  rgba(255, 255, 255, 0)),
+                    url('../images/pexels-lumn-406014comp.jpg');                  
+  background-color: #ffffff;
+  height:100%;
+  background-position:center;
+  background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.container2{
+  position:absolute;
+  max-width:900px;
+  height:600px;
+  margin:auto;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+#check header{
+  color:green;
+  font-size:50px;
+  text-align: center;
+  font-family: 'DFKai-SB',cursive;
+}
+
+#check p{
+  font-size:26px;
+  text-align: center;
+  font-family: 'DFKai-SB',cursive;
+}
+
+
+#check .checkcard{
+  border-style: solid;
+  background-color: rgba(255, 255, 255, 0.473);
+  border-radius: 10%;
+  box-shadow:5px 5px 15px orangered;
+  transition:all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  margin-top:35;
+}
+
+#check .checkcard:hover{
+  background: rgba(46, 144, 224, 0.781);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 5px 5px 10px #9E9E9E;
+}
+
+#check .checkcard:hover p{
+  color: #fff;
+}

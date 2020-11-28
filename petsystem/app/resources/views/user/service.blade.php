@@ -46,7 +46,7 @@
            <div class="cardbutton">
              <img src="images/appointmentbutton-comp3.jpg" alt="">
              <div class="info">
-               <button type='button' class="butt" onclick="javascript: location.href='/appointment/create'">點擊掛號</button>
+               <button type='button' class="butt" onclick="javascript: location.href='/appointmentcreate'">點擊掛號</button>
                <p>進入掛號表單</p>
              </div>
            </div>
@@ -57,9 +57,9 @@
            <div class="cardbutton">
              <img src="images/Medicalrecord-comp.jpg" alt="">
              <div class="info">
-               <button type='button' class="butt" onclick="javascript: location.href='checkmedicalrecord'">查看病歷</button>
-               <button type='button' class="butt" onclick="javascript: location.href='checkappointment'">看診預約</button>
-               <p>進入寵物病歷</p>
+               <button type='button' class="butt" onclick="javascript: location.href='checktreatment'">就診紀錄</button>
+               <button type='button' class="butt" onclick="javascript: location.href='checkappointment'">查看預約</button>
+               <p>進入寵物資料</p>
              </div>
            </div>
          </div>

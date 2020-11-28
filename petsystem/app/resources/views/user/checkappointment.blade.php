@@ -98,23 +98,12 @@
               <h3>回診</h3>
               @endif
 
-              @if(($appointments->petsclass) != "otherpets")
               @if(($appointments->petsclass) == "dog")
               <h5>寵物犬</h5>
               @elseif(($appointments->petsclass) == "cat")
-              <h5>寵物貓</h5>
-              @elseif(($appointments->petsclass) == "birds")
-              <h5>寵物鳥</h5>
-              @elseif(($appointments->petsclass) == "Reptilia")
-              <h5>爬蟲類</h5>
-              @elseif(($appointments->petsclass) == "fish")
-              <h5>魚類</h5>
-              @elseif(($appointments->petsclass) == "Mammalia")
-              <h5>哺乳動物</h5>
+              <h5>寵物貓</h5> 
               @endif
-              @elseif(($appointments->petsclass) == "otherpets")
-              <h5>{{$appointments->otherpets}}</h5>
-              @endif
+              
 
               @if(($appointments->petsgender) == "male")
               <h5>性別:公</h5>

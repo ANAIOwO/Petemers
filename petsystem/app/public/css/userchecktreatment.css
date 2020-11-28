@@ -55,7 +55,7 @@ h5{
 }
 
 #check .checkcard:hover h3, #check .checkcard:hover i{
-  color: #fff;
+  color: rgb(255, 0, 0);
 }
 
 .alert{

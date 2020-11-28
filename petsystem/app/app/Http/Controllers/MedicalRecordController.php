@@ -7,6 +7,7 @@ use Faker\Provider\Image as ProviderImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 class MedicalRecordController extends Controller
 {
@@ -26,6 +27,16 @@ class MedicalRecordController extends Controller
     {
         $medicalrecord = MedicalRecord::all();
         return view('user/checkmedicalrecord', compact('medicalrecord'));
+    }
+
+    public function checkadmin()
+    {
+        //$user = Auth::user()->name;
+        $medicalrecord = MedicalRecord::all();
+        //$appointment = DB::table('appointments')
+        //->where('names', 'LIKE', '%' . $user . '%')
+        //->get();
+        return view('petsystemadmin/admincheckmedicalrecord', compact('medicalrecord'));
     }
     /**
      * Show the form for creating a new resource.
@@ -48,24 +59,18 @@ class MedicalRecordController extends Controller
     {
         //
         $request->validate([
-            'names' => 'required|max:255',
-            'phonenumber' => 'required|numeric|digits_between:8,10',
-            'birthday' => 'required|max:255',
-            'address' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'remark' => 'max:255',
+            'phonenumber' => 'required',
             'petpicture' => 'image|max:2048',
             'medicalrecordnumber' => 'required|unique:medical_records',
             'petname' => 'required|max:255',
             'petgender' => 'required|max:255',
             'petsclass' => 'max:255',
-            'otherpets' => 'max:255',
             'chipnumber' => 'required|max:255',
             'petbirthday' => 'required|max:255',
             'breed' => 'required|max:255',
-            'otherbreed' => 'max:255',
             'rabiesid' => 'max:255',
             'bloodtype' => 'required|max:255',
+            'fix' => 'required|max:255',
             'specialmedicalhistory' => 'max:255',
         ]);
 
@@ -76,30 +81,25 @@ class MedicalRecordController extends Controller
         Response::make($image->encode('jpeg'));
 
         $storeData = array(
-            'names' => $request->names,
-            'phonenumber' =>  $request->phonenumber,
-            'birthday' =>  $request->birthday,
-            'address' =>  $request->address,
-            'email' =>  $request->email,
-            'remark' =>  $request->remark,
+            'phonenumber' => $request->phonenumber,
             'petpicture' => $image,
+            'hospital' => Auth::user()->name,
             'medicalrecordnumber' => $request->medicalrecordnumber,
             'petname' => $request->petname,
             'petgender' => $request->petgender,
             'petsclass' => $request->petsclass,
-            //'otherpets' => $request->otherpets,
             'chipnumber' => $request->chipnumber,
             'petbirthday' => $request->petbirthday,
             'breed' => $request->breed,
-            //'otherbreed' => $request->otherbreed,
             'rabiesid' => $request->rabiesid,
             'bloodtype' => $request->bloodtype,
+            'fix' => $request->fix,
             'specialmedicalhistory' => $request->specialmedicalhistory,
         );
 
         $medicalrecord = MedicalRecord::create($storeData);
         
-        return redirect('/medicalrecordshow')->with('completed', 'MedicalRecord has been saved!');
+        return redirect('/admincheckmedicalrecord')->with('completed', 'MedicalRecord has been saved!');
     }
 
 
@@ -133,7 +133,8 @@ class MedicalRecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $medicalrecord = MedicalRecord::findOrFail($id);
+        return view('petsystemadmin/editmedicalrecord', compact('medicalrecord'));
     }
 
     /**
@@ -145,7 +146,37 @@ class MedicalRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'medicalrecordnumber' => 'required',
+            'petname' => 'required|max:255',
+            'petgender' => 'required|max:255',
+            'petsclass' => 'max:255',
+            'chipnumber' => 'required|max:255',
+            'petbirthday' => 'required|max:255',
+            'breed' => 'required|max:255',
+            'rabiesid' => 'max:255',
+            'bloodtype' => 'required|max:255',
+            'fix' => 'required|max:255',
+            'specialmedicalhistory' => 'max:255',
+        ]);
+
+        $storeData = array(
+            'medicalrecordnumber' => $request->medicalrecordnumber,
+            'petname' => $request->petname,
+            'petgender' => $request->petgender,
+            'petsclass' => $request->petsclass,
+            'chipnumber' => $request->chipnumber,
+            'petbirthday' => $request->petbirthday,
+            'breed' => $request->breed,
+            'rabiesid' => $request->rabiesid,
+            'bloodtype' => $request->bloodtype,
+            'fix' => $request->fix,
+            'specialmedicalhistory' => $request->specialmedicalhistory,
+        );
+
+        MedicalRecord::whereId($id)->update($storeData);
+        
+        return redirect('/admincheckmedicalrecord')->with('completed', 'MedicalRecord has been saved!');
     }
 
     /**
@@ -156,6 +187,9 @@ class MedicalRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $medicalrecord = MedicalRecord::findOrFail($id);
+        $medicalrecord->delete();
+
+        return redirect('/admincheckmedicalrecord')->with('completed', 'Student has been deleted');
     }
 }

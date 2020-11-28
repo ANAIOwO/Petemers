@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AdminComments;
 use App\Models\Post;
+use App\Http\Controllers\redicect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class PostController extends Controller
+class AdminCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +17,14 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $user = Auth::user()->name;
-        //$post = Post::all();
-        $post = DB::table('posts')
-        ->where('hospital', 'LIKE', '%' . $user . '%')
+    {
+        $comment = DB::table('admin_comments')
+        ->where('post_id', 'LIKE', '%' . Auth::user()->id . '%')
         ->get();
-        return view('post', compact('post'));
+        return view('post', compact('comment'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('postcreate');
+        //
     }
 
     /**
@@ -43,6 +45,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, array(
+            'name' =>'required|max:255',
+            'contact'=>'required|max:255',
+            'comment' => 'required|min:1|max:2000',
+        ));
+
+        $comment = new AdminComments();
+        $comment->name = $request->name;
+        $comment->contact = $request->contact;
+        $comment->comment = $request->comment;
+        $comment->post_id =  Auth::user()->id;
+
+        $comment->save();
+
+        return redirect('/showposts');
     }
 
     /**
@@ -87,6 +104,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = AdminComments::findOrFail($id);
+        $comment->delete();
+
+        return redirect('/showposts');
     }
+    
 }
