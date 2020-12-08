@@ -16,6 +16,7 @@ class DynamicDependentcityhospital extends Controller
 
         $city_list = DB::table('city_hospital')
                     ->groupBy('city')
+                    ->orderBy('city_id', 'asc')
                     ->get();
                     
         //return view('user/create')->with('city_list',$city_list);

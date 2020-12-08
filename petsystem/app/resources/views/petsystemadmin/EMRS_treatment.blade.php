@@ -48,7 +48,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Petemers | EMRS-Treatment</title>
+  <title>Petemers | EMRS Treatment</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
@@ -91,7 +91,6 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <div> 就診紀錄系統 </div>
               @if ($errors->any())
               <div class="alert alert-danger">
                 <ul>
@@ -101,12 +100,6 @@
                 </ul>
               </div><br>
               @endif
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
-              </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -118,6 +111,21 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
+              <div class="col-12 col-xl-12" style="background-color:#C4C4C4;height:50px;">
+                <!-- SEARCH FORM -->
+                <form class="form-inline ml-3 " method="GET" action="{{ url('searchuser')}}">
+                  <label for="inputName1" class="col-sm-1 col-form-label searchbar-mtop" style="font-size:20px">顧客電話:</label>
+                  <div class="input-group input-group-sm">
+                    <input type="search" class="form-control form-control-sm searchbar-mtop" placeholder="" name="searchnumber">
+                  </div>
+                  <div class="input-group-append">
+                    <button class="col-sm-1 btn btn-navbar searchbar-mtop" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </form>
+                <!-- /.SEARCH FORM -->
+              </div>
               <!-- general form elements -->
               @if($users->isEmpty())
               <form enctype="multipart/form-data">
@@ -362,30 +370,30 @@
                             <input type="text" class="form-control col-in-s" id="inputMRnmb1" name="medicalrecordnumber" value="{{ $medicalrecord->medicalrecordnumber }}" required="true">
                             @endforeach
                             <label for="inputPName1" class="col-lab-4 col-form-label ">醫院</label>
-                            <input type="text" class="form-control col-in-s" id="inputPName1" name="hospital" value="{{ $medicalrecord->hospital }}">
+                            <input type="text" class="form-control col-in-s" id="inputPName1" name="hospital" value="{{ $medicalrecord->hospital }}" required="true">
                             <label for="inputPName1" class="col-lab-4 col-form-label ">看診醫生</label>
                             <input type="text" class="form-control col-in-s" id="inputPName1" name="doctorname" required="true">
                           </div>
                           <div class='form-group row'>
                             <label for="inputPName1" class="col-lab-4 col-form-label ">看診日期</label>
                             <!--要寫一個填寫生日後會出現年紀的box-->
-                            <input type="text" class="form-control col-in-s" name="day" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                            <input type="text" class="form-control col-in-s" name="day" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask required="true">
                           </div>
                           <div class='form-group row'>
                             <label for="inputPName1" class="col-lab-4 col-form-label ">評估狀況</label>
                             <textarea class="form-control" id="inputPName1" name="assess" required="true" rows="2"></textarea>
                           </div>
                           <div class='form-group row'>
-                            <label for="inputPName1" class="col-lab-4 col-form-label ">醫療處理</label>
-                            <textarea class="form-control" id="inputPName1" name="treatment" required="true" rows="2"> </textarea>
+                            <label for="inputPName2" class="col-lab-4 col-form-label ">醫療處理</label>
+                            <textarea class="form-control" id="inputPName2" name="treatment" required="true" rows="2"></textarea>
                           </div>
                           <div class='form-group row'>
-                            <label for="inputPName1" class="col-lab-4 col-form-label ">用藥</label>
-                            <textarea class="form-control" id="inputPName1" name="medicine" required="true" rows="2"> </textarea>
+                            <label for="inputPName3" class="col-lab-4 col-form-label ">用藥</label>
+                            <textarea class="form-control" id="inputPName3" name="medicine" required="true" rows="2"></textarea>
                           </div>
                           <div class='form-group row'>
                             <label for="inputPName1" class="col-lab-4 col-form-label ">備註</label>
-                            <textarea class="form-control" id="inputPName1" name="remark" rows="2"> </textarea>
+                            <textarea class="form-control" id="inputPName1" name="remark" rows="2"></textarea>
                           </div>
                         </div>
                       </form>
@@ -427,7 +435,7 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        Anything you want
+        (NTOU-CSE-專題-Petemers團隊)
       </div>
       <!-- Default to the left -->
       <strong>Copyright &copy; 2020 <a href="https://">Petemers</a>.</strong> All rights reserved.

@@ -32,7 +32,7 @@
         </ul>
       </div><br>
       @endif
-      <form name="myForm" class="myForm" method="post" action="{{ route('appointment.store') }}" accept-charset="utf-8">
+      <form name="myForm" class="myForm" method="post" action="{{ url('appointment/store') }}" accept-charset="utf-8">
         <!--
           @csrf
         -->

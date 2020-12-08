@@ -26,9 +26,9 @@
     <div class="container my-3 py-5 text-center">
       <div class="row mb-5">
         <div class="col">
-          <h1>您的寵物病歷紀錄</h1>
+          <h1>您的寵物就診紀錄</h1>
           <h2 class="mt-3">
-            下列列出您的寵物病歷詳細
+            下列列出您的寵物就診詳細
           </h2>
         </div>
       </div>
@@ -58,18 +58,18 @@
               <h5>看診醫生:{{$treatments->doctorname}}</h5>
               <h5>看診日期:{{$treatments->day}}</h5>
             </div>
-            <div class="d-flex justify-content-between">
+            <br>
+            <div class="card-text">
               <h5>評估狀況:{{$treatments->assess}}</h5>
-            </div>
-            <div class="d-flex justify-content-between">
+              <br>
+              <h5>醫療處理:{{$treatments->treatment}}</h5>
+              <br>
+              <h5>用藥:{{$treatments->medicine}}</h5>
+              <br>
               <h5>備註:{{$treatments->remark}}</h5>
-            </div>
-            <div class="d-flex justify-content-between">
-              <a href="{{ url('userchecktreatments',['id'=>$treatments->id])}}" class="btn btn-primary btn-sm" style="width:100%">查看詳細</a>
             </div>
           </div>
         </div>
-
         @endforeach
       </div>
     </div>

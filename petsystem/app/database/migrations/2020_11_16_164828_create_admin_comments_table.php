@@ -14,10 +14,10 @@ class CreateAdminCommentsTable extends Migration
     public function up()
     {
         Schema::create('admin_comments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('email');
-            $table->integer('post_id');
+            $table->string('contact');
+            $table->BigInteger('post_id');
             $table->text('comment');
             $table->timestamps();
         });

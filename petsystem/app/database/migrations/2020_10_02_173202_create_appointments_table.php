@@ -16,12 +16,12 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('hospital');
-            $table->string('day');
+            $table->date('day');
             $table->string('time');
             $table->string('classification');
             $table->string('petsclass');
-            $table->string('otherpets');
             $table->string('petsgender');
+            $table->string('chipnumber');
             $table->string('names');
             $table->string('phonenumber');
             $table->string('remark');

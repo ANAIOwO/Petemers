@@ -37,8 +37,12 @@ class CommentsController extends Controller
      */
     public function store(Post $post)
     {
-
-        $this->validate(request(),['body'=>'required|min:2','name'=>'required']);
+        $messages = [
+            "body.required" => "需要輸入留言",
+            "body.min" => "留言需大於兩個字",
+            "name.required"  => "需要輸入留言者"
+        ];
+        $this->validate(request(),['body'=>'required|min:2','name'=>'required'], $messages);
         //
         $post->addComment(request('body'),request('name'));
         /*

@@ -31,15 +31,15 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="title">標題:</label>
-                        <input type="text" class="form-control" id="title" name="title">
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="name">發布者:</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name"required>
                     </div>
                     <div class="form-group">
                         <label for="body">此討論區的說明</label>
-                        <textarea id="body" name="body" class="form-control"></textarea>
+                        <textarea id="body" name="body" class="form-control" required></textarea>
                     </div>
 
                     <div class="d-flex justify-content-center">

@@ -33,10 +33,10 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-lg-12">
-                    <div class="col-12 col-xl-12" style="background-color:#C4C4C4;height:50px;">
+                    <div class="col-12 col-xl-12" style="background-color:#C4C4C4;height:50px">
                       <!-- SEARCH FORM -->
                       <form class="form-inline ml-3 " method="GET" action="{{ url('searchuser')}}">
-                        <label for="inputName1" class="col-sm-4 col-form-label searchbar-mtop" style="font-size:20px">新增病歷-查詢顧客電話:</label>
+                        <label for="inputName1" class="col-sm-4 col-form-label searchbar-mtop" style="font-size:20px">查詢病歷-查詢顧客電話:</label>
                         <div class="input-group input-group-sm">
                           <input type="search" class="form-control form-control-sm searchbar-mtop" placeholder="" name="searchnumber">
                         </div>
@@ -71,9 +71,8 @@
                   <td>寵物類別</td>
                   <td>預約者/飼主</td>
                   <td>連絡電話</td>
-                  <td>備註</td>
                   <td>是否有病歷</td>
-                  <td class="text-center">Action</td>
+                  <td class="text-center">操作</td>
                 </tr>
               </thead>
               <tbody>
@@ -82,11 +81,18 @@
                   <td>{{$appointments->hospital}}</td>
                   <td>{{$appointments->day}}</td>
                   <td>{{$appointments->time}}</td>
-                  <td>{{$appointments->classification}}</td>
-                  <td>{{$appointments->petsclass}}</td>
+                  @if(($appointments->classification) == "hurtorsick")
+                  <td>看診</td>
+                  @elseif(($appointments->classification) != "hurtorsick")
+                  <td>回診</td>
+                  @endif
+                  @if(($appointments->petsclass) == "dog")
+                  <td>犬</td>
+                  @elseif(($appointments->petsclass) == "cat")
+                  <td>貓</td>
+                  @endif
                   <td>{{$appointments->names}}</td>
                   <td>{{$appointments->phonenumber}}</td>
-                  <td>{{$appointments->remark}}</td>
                   <td>
                     @foreach($medicalrecord as $medicalrecords)
                     @if(($medicalrecords->phonenumber)==($appointments->phonenumber) && ($medicalrecords->chipnumber)==($appointments->chipnumber))
@@ -99,13 +105,14 @@
                     <form action=" {{ route('appointment.destroy', $appointments->id)}}" method="post" style="display: inline-block">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger btn-sm"" type=" submit">刪除</button>
+                      <button class="btn btn-danger btn-sm" type=" submit">刪除</button>
                     </form>
                   </td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
+            <h2 style="text-align:center;">以上是預約資料</h2>
           </div>
         </div>
       </div>

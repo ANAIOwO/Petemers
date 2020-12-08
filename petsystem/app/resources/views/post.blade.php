@@ -19,9 +19,13 @@
       <div class="content">
         <div class="card card-primary">
 
-          @if(session()->get('success'))
-          <div class="alert alert-success">
-            {{ session()->get('success') }}
+          @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
           </div><br />
           @endif
 
@@ -72,15 +76,15 @@
                   {{ csrf_field() }}
                   <p>職員姓名:</p>
                   <label for="name"></label>
-                  <input type="text" class="form-control" name="name" />
+                  <input type="text" class="form-control" name="name" required />
 
                   <p>聯絡方式:</p>
                   <label for="contact"></label>
-                  <input type="text" class="form-control" name="contact" />
+                  <input type="text" class="form-control" name="contact" required />
 
                   <p>留言:</p>
                   <label for="comment"></label>
-                  <input type="text" class="form-control" name="comment" placeholder="留言請2個字以上" />
+                  <input type="text" class="form-control" name="comment" placeholder="留言請2個字以上" required />
                   <input type="submit" value="提交">
                 </form>
               </div>

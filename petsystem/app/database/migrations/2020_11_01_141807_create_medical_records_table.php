@@ -15,24 +15,19 @@ class CreateMedicalRecordsTable extends Migration
     {
         Schema::create('medical_records', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('names');
             $table->string('phonenumber');
-            $table->string('birthday');
-            $table->string('address');
-            $table->string('email');
-            $table->string('remark');
-            $table->string('petpicture')->default('default.jpg');
+            $table->binary('petpicture')->default('default.jpg');
+            $table->string('hospital');
             $table->string('medicalrecordnumber')->unique();
             $table->string('petname');
             $table->string('petgender');
             $table->string('petsclass');
-            $table->string('otherpets');
             $table->string('chipnumber');
             $table->string('petbirthday');
             $table->string('breed');
-            $table->string('otherbreed');
             $table->string('rabiesid');
             $table->string('bloodtype');
+            $table->string('fix');
             $table->string('specialmedicalhistory');
             $table->timestamps();
         });

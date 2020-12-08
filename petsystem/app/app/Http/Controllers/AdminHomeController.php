@@ -11,6 +11,12 @@ class AdminHomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+        //開啟授權，注意要開啟
+    }
+    
     public function index()
     {
       return view('petsystemadmin/index');
@@ -21,6 +27,7 @@ class AdminHomeController extends Controller
     {
       return view('petsystemadmin/EMRS_home');
     }
+
  
     public function medicalrecordcreate()
     {

@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class AdminPostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+        //開啟授權，注意要開啟
+    }
     /**
      * Display a listing of the resource.
      *

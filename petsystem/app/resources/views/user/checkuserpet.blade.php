@@ -25,9 +25,9 @@
     <div class="container my-3 py-5 text-center">
       <div class="row mb-5">
         <div class="col">
-          <h1>您的預約紀錄</h1>
+          <h1>您的寵物資料</h1>
           <h2 class="mt-3">
-            下列列出您的預約詳細
+            下列列出您的寵物資料詳細
           </h2>
           <a href="/userpetcreate" class="btn btn-block btn-success" role="button" aria-pressed="true">新增寵物資料</a>
         </div>
@@ -52,16 +52,18 @@
             <div class="checkcard-body">
               <img src="userpetshow/fetch_image/{{ $userpets->id }}" class="img-fluid rounded-circle mb-3" width="300" height="300" />
               <h3>寵物名字:{{$userpets->petname}}</h3>
+              <h3>寵物生日:{{$userpets->petbirthday}}</h3>
               <h3>寵物性別:{{$userpets->petgender}}</h3>
               <h3>寵物類別:{{$userpets->petsclass}}</h3>
               <h3>寵物品種:{{$userpets->breed}}</h3>
-              <h3>晶片號碼:{{$userpets->chipnumber}}</h3>
-              <h3>寵物生日:{{$userpets->petbirthday}}</h3>
-              <h3>狂犬牌號:{{$userpets->rabiesid}}</h3>
               <h3>寵物血型:{{$userpets->bloodtype}}</h3>
               <h3>結紮狀況:{{$userpets->fix}}</h3>
-              <h3>特殊病史:{{$userpets->specialmedicalhistory}}</h3>
-              <a href="{{ route('userpets.edit', $userpets->id)}}" class="btn btn-primary btn-sm" style="width:200px">查看與修改</a>
+              <h3>晶片號碼:{{$userpets->chipnumber}}</h3>
+              <h3>狂犬牌號:{{$userpets->rabiesid}}</h3>
+              <div class="card-text">
+                <h3>特殊病史:{{$userpets->specialmedicalhistory}}</h3>
+              </div>
+
               <form action=" {{ route('userpets.destroy', $userpets->id)}}" method="post" style="display: inline-block">
                 @csrf
                 @method('DELETE')

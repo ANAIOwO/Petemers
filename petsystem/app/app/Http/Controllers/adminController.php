@@ -10,36 +10,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\AdminComments;
 use App\Models\User;
+use Carbon\Carbon;
+
 
 class adminController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('role:superadministrator');
+        $this->middleware('role:superadministrator');
         //開啟授權，注意要開啟
     }
 
     public function index()
     {
         return view('admin.index');
-    }
-    public function adminhome()
-    {
-        return view('petsystemadmin/EMRS_home');
-    }
-
-    public function admincheck()
-    {
-        $user = Auth::user()->name;
-        $appointment = Appointment::all();
-        //$appointment = DB::table('appointments')
-        //->where('names', 'LIKE', '%' . $user . '%')
-        //->get();
-
-        //$medicalrecord = MedicalRecord::all();
-
-        //return view('petsystemadmin/checkappmed', compact('appointment','medicalrecord'));
-        return view('petsystemadmin/checkappointment', compact('appointment'));
     }
 
     public function destroyall()
@@ -61,7 +45,8 @@ class adminController extends Controller
 
         //$medicalrecord = DB::table('medical_records')->where('phonenumber', 'LIKE', $searchnumber)->where('hospital', 'LIKE', Auth::user()->name)->get();
 
-        $medicalrecord =  MedicalRecord::all();
+        //$medicalrecord =  MedicalRecord::all();
+        $medicalrecord = DB::table('medical_records')->where('phonenumber','LIKE', $searchnumber)->get();
         return view('petsystemadmin/EMRS_emr_create', compact('users', 'userpet', 'medicalrecord'));
     }
 
@@ -75,7 +60,7 @@ class adminController extends Controller
 
         //$pettreatment = DB::table('treatments')->where('medicalrecordnumber', 'LIKE', $mrnumber)->get();
         $checkhospital = Auth::user()->name;
-        $pettreatment = DB::table('treatments')->where('medicalrecordnumber', 'LIKE', $mrnumber)->get();
+        $pettreatment = DB::table('treatments')->where('medicalrecordnumber', 'LIKE', $mrnumber)->whereDate('created_at', '>', Carbon::now()->subDays(30))->orderby('id','DESC')->get();
 
         return view('petsystemadmin/EMRS_treatment', compact('users', 'petmedicalrecord', 'pettreatment'));
     }

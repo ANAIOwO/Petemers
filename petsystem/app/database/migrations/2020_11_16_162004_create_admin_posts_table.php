@@ -14,8 +14,8 @@ class CreateAdminPostsTable extends Migration
     public function up()
     {
         Schema::create('admin_posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('hospital');
+            $table->bigIncrements('id');
+            $table->string('hospital')->unique();
             $table->string('title');
             $table->text('body');
             $table->timestamps();

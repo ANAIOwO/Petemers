@@ -11,6 +11,11 @@ use App\Models\MedicalRecord;
 
 class TreatmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+        //開啟授權，注意要開啟
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,18 +25,6 @@ class TreatmentController extends Controller
     {
         $treatment = Treatment::all();
         return view('petsystemadmin/EMRS_emr_create', compact('treatment'));
-    }
-
-    public function usercheck()
-    {
-        $treatment = DB::table('treatments')->where('phonenumber', 'LIKE', Auth::user()->phonenumber )->get();
-        return view('user/checktreatment', compact('treatment'));
-    }
-
-    public function usercheckid($id)
-    {
-        $treatment = Treatment::findOrFail($id);
-        return view('user/checktreatmentid', compact('treatment'));
     }
 
     /**
@@ -53,8 +46,21 @@ class TreatmentController extends Controller
     public function store(Request $request)
     {
         //
+        $messages = [
+            "medicalrecordnumber.required" => "病歷號碼請確認相同並填入!",
+            "hospital.required" => "醫院請確認填入!",
+            "doctorname.required" => "醫院請確認填入!",
+            "day.required" => "需填入日期!",
+            "assess.required" => "評估狀況請填寫!",
+            "treatment.required" => "醫療處理請填寫!",
+            "medicine.required" => "用藥請填寫!",
+            "phonenumber.required" => "會員編號為(會員電話)請確認填入!",
+            "phonenumber.numeric" => "會員編號為(會員電話)需填入數字!",
+            "phonenumber.digits_between" => "會員編號為(會員電話)需符合8~10個數字!"
+        ];
+
         $request->validate([
-            'phonenumber' => 'required',
+            'phonenumber' => 'required|numeric|digits_between:8,10',
             'medicalrecordnumber' => 'required',
             'hospital' => 'required|max:255',
             'doctorname' => 'required|max:255',
@@ -63,7 +69,7 @@ class TreatmentController extends Controller
             'treatment' => 'required|max:255',
             'medicine' => 'required|max:255',
             'remark' => 'max:255',
-        ]);
+        ], $messages);
 
 
         $storeData = array(
@@ -123,6 +129,14 @@ class TreatmentController extends Controller
      */
     public function update(Request $request, $id ,$phonenumber,$medicalrecordnumber)
     {
+        $messages = [
+            "doctorname.required" => "醫院請確認填入!",
+            "day.required" => "需填入日期!",
+            "assess.required" => "評估狀況請填寫!",
+            "treatment.required" => "醫療處理請填寫!",
+            "medicine.required" => "用藥請填寫!",
+        ];
+
         $request->validate([
             'doctorname' => 'required|max:255',
             'day' => 'required|max:255',
@@ -130,7 +144,7 @@ class TreatmentController extends Controller
             'treatment' => 'required|max:255',
             'medicine' => 'required|max:255',
             'remark' => 'max:255',
-        ]);
+        ], $messages);
 
 
         $updateData = array(

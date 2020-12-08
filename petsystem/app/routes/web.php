@@ -31,19 +31,17 @@ Route::get('/introduce', function () {
 
 //appointment data
 Route::resource('appointment', 'App\Http\Controllers\AppointmentController');
-Route::get('/checkappointment', 'App\Http\Controllers\AppointmentController@index');
+
 Route::get('/appointmentcreate', 'App\Http\Controllers\AppointmentController@create');
+
+Route::post('/appointment/store','App\Http\Controllers\UserController@store');
 //medicalrecord
 Route::resource('medicalrecords', 'App\Http\Controllers\MedicalRecordController');
-Route::get('/checktreatment', 'App\Http\Controllers\TreatmentController@usercheck');
+
 
 Route::get('/medicalrecordshow', 'App\Http\Controllers\MedicalRecordController@index');
 Route::get('/medicalrecordshow/fetch_image/{id}','App\Http\Controllers\MedicalRecordController@fetch_image');
 
-/*
-Route::get('/checkmedicalrecord', 'App\Http\Controllers\MedicalRecordController@usercheck');
-Route::get('/checkmedicalrecord/fetch_image/{id}','App\Http\Controllers\MedicalRecordController@fetch_image');
-*/
 //user
 Route::get('/service', 'App\Http\Controllers\UserController@service');
 
@@ -57,7 +55,12 @@ Route::resource('treatments', 'App\Http\Controllers\TreatmentController');
 Route::get('treatmentdata/{userphonenumber}/{mrnumber}','App\Http\Controllers\adminController@treatmentdata')->name('treatmentdata');
 Route::delete('treatmentsdelete/{id}/{userphonenumber}/{mrnumber}', 'App\Http\Controllers\TreatmentController@destroy')->name('destroy');
 Route::patch('treatmentsupdate/{id}/{userphonenumber}/{mrnumber}', 'App\Http\Controllers\TreatmentController@update')->name('update');
-Route::get('userchecktreatments/{id}', 'App\Http\Controllers\TreatmentController@usercheckid')->name('usercheckid');
+
+//usercheck
+Route::get('/checktreatment', 'App\Http\Controllers\UserController@userchecktreatment');
+//Route::get('userchecktreatments/{id}', 'App\Http\Controllers\UserController@usercheckid')->name('usercheckid');
+Route::get('/checkappointment', 'App\Http\Controllers\UserController@usercheckappointment');
+
 
 //userpets
 Route::resource('userpets', 'App\Http\Controllers\userpetsController');
@@ -68,13 +71,15 @@ Route::get('/userpetcreate', 'App\Http\Controllers\userpetsController@create');
 
 //admin
 //Route::get('/adminhome','App\Http\Controllers\AdminHomeController@index')->name('index');
-Route::get('/adminhome','App\Http\Controllers\adminController@adminhome')->name('admin');
+//Route::get('/adminhome','App\Http\Controllers\adminController@adminhome')->name('admin');
 Route::get('/EMRS_home','App\Http\Controllers\AdminHomeController@EMRS')->name('EMRS');
 //Route::get('/medicalrecordcreate','App\Http\Controllers\AdminHomeController@medicalrecordcreate')->name('medicalrecordcreate');
 Route::get('/admincheckappointment', 'App\Http\Controllers\AppointmentController@checkadmin');
 Route::get('/admincheckmedicalrecord', 'App\Http\Controllers\MedicalRecordController@checkadmin');
 //暫定searchuser
 Route::get('searchuser','App\Http\Controllers\adminController@search_userdata')->name('search_userdata');
+
+
 
 //adminComments
 Route::resource('adminposts','App\Http\Controllers\AdminPostController');

@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MedicalRecordController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+        //開啟授權，注意要開啟
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,16 +30,10 @@ class MedicalRecordController extends Controller
         return view('user/checkmedicalrecord', compact('medicalrecord'));
     }
 
-    public function usercheck()
-    {
-        $medicalrecord = MedicalRecord::all();
-        return view('user/checkmedicalrecord', compact('medicalrecord'));
-    }
-
     public function checkadmin()
     {
-        //$user = Auth::user()->name;
-        $medicalrecord = MedicalRecord::all();
+        $admin = Auth::user()->name;
+        $medicalrecord = DB::table('medical_records')->where('hospital', 'LIKE', $admin)->orderby('created_at','DESC')->get();
         //$appointment = DB::table('appointments')
         //->where('names', 'LIKE', '%' . $user . '%')
         //->get();
@@ -58,21 +59,38 @@ class MedicalRecordController extends Controller
     public function store(Request $request)
     {
         //
+        $messages = [
+            "phonenumber.required" => "會員編號為(會員電話)請確認填入!",
+            "medicalrecordnumber.required" => "需填入病歷號碼!",
+            "medicalrecordnumber.unique" => "病歷號碼已存在，請修改!",
+            "petname.required" => "需填入寵物名字!",
+            "petgender.required" => "需選擇寵物性別!",
+            "petsclass.required" => "需選擇寵物種類!",
+            "chipnumber.required" => "需輸入晶片號碼!",
+            "chipnumber.unique" => "晶片號碼已存在，請修改!",
+            "petbirthday.required" => "需輸入寵物生日!",
+            "breed.required" => "需選擇寵物品種!",
+            "bloodtype.required" => "需選擇寵物血型!",
+            "fix.required" => "需選擇結紮狀況!",
+            "phonenumber.numeric" => "會員編號為(會員電話)需填入數字!",
+            "phonenumber.digits_between" => "會員編號為(會員電話)需符合8~10個數字!"
+        ];
+
         $request->validate([
-            'phonenumber' => 'required',
+            'phonenumber' => 'required|numeric|digits_between:8,10',
             'petpicture' => 'image|max:2048',
             'medicalrecordnumber' => 'required|unique:medical_records',
             'petname' => 'required|max:255',
             'petgender' => 'required|max:255',
-            'petsclass' => 'max:255',
-            'chipnumber' => 'required|max:255',
+            'petsclass' => 'required|max:255',
+            'chipnumber' => 'required|max:255|unique:medical_records',
             'petbirthday' => 'required|max:255',
             'breed' => 'required|max:255',
             'rabiesid' => 'max:255',
             'bloodtype' => 'required|max:255',
             'fix' => 'required|max:255',
             'specialmedicalhistory' => 'max:255',
-        ]);
+        ], $messages);
 
         $image_file = $request->file('petpicture');
         
@@ -146,26 +164,32 @@ class MedicalRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            "petname.required" => "需填入寵物名字!",
+            "petgender.required" => "需選擇寵物性別!",
+            "petsclass.required" => "需選擇寵物種類!",
+            "petbirthday.required" => "需輸入寵物生日!",
+            "breed.required" => "需選擇寵物品種!",
+            "bloodtype.required" => "需選擇寵物血型!",
+            "fix.required" => "需選擇結紮狀況!",
+        ];
+
         $request->validate([
-            'medicalrecordnumber' => 'required',
             'petname' => 'required|max:255',
             'petgender' => 'required|max:255',
-            'petsclass' => 'max:255',
-            'chipnumber' => 'required|max:255',
+            'petsclass' => 'required|max:255',
             'petbirthday' => 'required|max:255',
             'breed' => 'required|max:255',
             'rabiesid' => 'max:255',
             'bloodtype' => 'required|max:255',
             'fix' => 'required|max:255',
             'specialmedicalhistory' => 'max:255',
-        ]);
+        ], $messages);
 
         $storeData = array(
-            'medicalrecordnumber' => $request->medicalrecordnumber,
             'petname' => $request->petname,
             'petgender' => $request->petgender,
             'petsclass' => $request->petsclass,
-            'chipnumber' => $request->chipnumber,
             'petbirthday' => $request->petbirthday,
             'breed' => $request->breed,
             'rabiesid' => $request->rabiesid,

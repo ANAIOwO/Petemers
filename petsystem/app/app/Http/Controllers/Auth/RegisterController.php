@@ -53,7 +53,6 @@ class RegisterController extends Controller
         //Error messages
         $messages = [
             "name.required" => "使用者名稱需填入!",
-            "name.unique" => "此使用者名稱已經註冊過了!",
             "email.required" => "信箱需填入!",
             "email.unique" => "此信箱已經註冊過了!",
             "password.required" => "密碼需填入!",
@@ -61,15 +60,16 @@ class RegisterController extends Controller
             "password.confirmed" => "下方確認密碼與輸入的密碼不相同!",
             "phonenumber.required" => "聯絡者電話/手機需填入!",
             "phonenumber.numeric" => "聯絡者電話/手機需為數字!",
-            "phonenumber.digits_between" => "聯絡者電話/手機號碼需符合8~10個數字!"
+            "phonenumber.digits_between" => "聯絡者電話/手機號碼需符合8~10個數字!",
+            "phonenumber.unique" => "此電話已經註冊過了!",
         ];
 
         // validate the form data
         return  $validator = Validator::make($data, [
-            'name' => 'required|unique:users',
+            'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
-            'phonenumber' => 'required|numeric|digits_between:8,10'
+            'phonenumber' => 'required|numeric|digits_between:8,10|unique:users'
         ], $messages);
         
         if ($validator->fails()) {

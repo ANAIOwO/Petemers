@@ -55,15 +55,15 @@
       </div>
       <div class='form-group'>
         <label for="inputPName1" class="col-lab-4 col-form-label ">評估狀況</label>
-        <textarea class="form-control" id="inputPName1" name="assess" rows="2" require="true">{{ $treatment->assess }}</textarea>
+        <textarea class="form-control" id="inputPName1" name="assess" rows="2" require="true">{{$treatment->assess}}</textarea>
       </div>
       <div class='form-group'>
         <label for="inputPName1" class="col-lab-4 col-form-label ">醫療處理</label>
-        <textarea class="form-control" id="inputPName1" name="treatment" rows="2" require="true">{{ $treatment->treatment }}</textarea>
+        <textarea class="form-control" id="inputPName1" name="treatment" rows="2" require="true">{{$treatment->treatment}}</textarea>
       </div>
       <div class='form-group'>
         <label for="inputPName1" class="col-lab-4 col-form-label ">用藥</label>
-        <textarea class="form-control" id="inputPName1" name="medicine" rows="2" required="true">{{ $treatment->medicine }}</textarea>
+        <textarea class="form-control" id="inputPName1" name="medicine" rows="2" required="true">{{$treatment->medicine}}</textarea>
       </div>
       <div class='form-group'>
         <label for="inputPName1" class="col-lab-4 col-form-label ">備註</label>

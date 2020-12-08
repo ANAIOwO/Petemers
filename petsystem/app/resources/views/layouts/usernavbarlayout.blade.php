@@ -20,6 +20,7 @@
             <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            @if (Auth::user())
             <ul>
                <li>
                   <a href="/introduce">關於寵物系統</a>
@@ -31,6 +32,16 @@
                   <a href="/forum">寵物系統討論區</a>
                </li>
             </ul>
+            @else
+            <ul>
+               <li>
+                  <a href="/service">選擇服務頁面</a>
+               </li>
+               <li>
+                  <a href="/forum">寵物系統討論區</a>
+               </li>
+            </ul>
+            @endif
             <ul class="nav navbar-nav navbar-right ml-auto">
                <!-- Authentication Links -->
                @if (Auth::guest())

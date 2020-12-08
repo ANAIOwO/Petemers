@@ -48,32 +48,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Petemers | EMRS-create</title>
+  <title>Petemers | EMRS Create</title>
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
+
+
 
 <body class="hold-transition sidebar-mini sidebar-collapse  sidebar-closed">
   <div class="wrapper">
@@ -101,12 +103,6 @@
               </div><br>
               @endif
             </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
-              </ol>
-            </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
@@ -117,6 +113,21 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
+              <div class="col-12 col-xl-12" style="background-color:#C4C4C4;height:50px;">
+                <!-- SEARCH FORM -->
+                <form class="form-inline ml-3 " method="GET" action="{{ url('searchuser')}}">
+                  <label for="inputName1" class="col-sm-1 col-form-label searchbar-mtop" style="font-size:20px">顧客電話:</label>
+                  <div class="input-group input-group-sm">
+                    <input type="search" class="form-control form-control-sm searchbar-mtop" placeholder="" name="searchnumber">
+                  </div>
+                  <div class="input-group-append">
+                    <button class="col-sm-1 btn btn-navbar searchbar-mtop" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </form>
+                <!-- /.SEARCH FORM -->
+              </div>
               <!-- general form elements -->
               @if($users->isEmpty())
               <form enctype="multipart/form-data">
@@ -207,7 +218,7 @@
                 </div>
               </form>
 
-              <form method="post" action="{{ route('medicalrecords.store') }}" enctype="multipart/form-data">
+              <form name="medicalrecord" method="post" action="{{ route('medicalrecords.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card card-primary">
                   <div class="card-header">
@@ -215,7 +226,6 @@
                     <hr>
                     <button type="submit" class="btn-sm btn-default">確定</button>
                     <button type="reset" class="btn-sm btn-default">清除</button>
-                    <button type="button" class="btn btn-outline-primary" style="color:seashell;"><i class="fas fa-window-close"></i>
                     </button>
                   </div>
                   <div class="col-12 col-lg-12">
@@ -295,8 +305,9 @@
                                   <option>公</option>
                                   <option>母</option>
                                 </select>
-                                <label for="slcGender" class="col-lab-4 col-form-label ">種類</label>
-                                <select class="form-control col-md-4" name="petsclass">
+                                <label for="slcGender" class="col-sm-1 col-form-label col-lab-4 ">種類</label>
+                                <select class="form-control col-in-s" name="petsclass" onChange="renew((this.selectedIndex)-1);renew2((this.selectedIndex)-1);">
+                                  <option disabled=disabled selected=selected>選取種類</option>
                                   <option>犬</option>
                                   <option>貓</option>
                                 </select>
@@ -306,17 +317,11 @@
                                 <input type="text" class="form-control col-in-s" id="inputMRnmb1" name="chipnumber" placeholder="" required="true">
                                 <label for="inputPName1" class="col-lab-4 col-form-label ">生日</label>
                                 <!--要寫一個填寫生日後會出現年紀的box-->
-                                <input type="text" class="form-control col-in-s" name="petbirthday" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                <input type="text" class="form-control col-in-s" name="petbirthday" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask required="true">
                                 <!-- select -->
                                 <label for="slcGender" class="col-sm-1 col-form-label col-lab-4 ">品種</label>
-                                <select class="form-control select2 " style="max-width: 20.2%;" name="breed">
-                                  <option selected="selected">請選擇品種</option>
-                                  <option>米克斯</option>
-                                  <option>California</option>
-                                  <option>Delaware</option>
-                                  <option>Tennessee</option>
-                                  <option>Texas</option>
-                                  <option>Washington</option>
+                                <select class="form-control select2 col-in-s" style="width: 20%;" name="breed">
+                                  <option disabled=disabled selected="selected">請先選擇種類</option>
                                 </select>
                                 <label for="inputPName1" class="col-lab-4 col-form-label ">寵物結紮</label>
                                 <select class="form-control select2 col-in-s " name="fix">
@@ -326,20 +331,10 @@
                               </div>
                               <div class="form-group row">
                                 <label for="inputPName1" class="col-lab-4 col-form-label ">狂犬牌號</label>
-                                <input type="text" class="form-control col-in-s" id="inputPName1" name="rabiesid" placeholder="" required="true">
+                                <input type="text" class="form-control col-in-s" id="inputPName1" name="rabiesid" placeholder="">
                                 <label for="inputPName1" class="col-lab-4 col-form-label ">血型</label>
                                 <select class="form-control select2 col-in-s " name="bloodtype" style="width:20%">
-                                  <option selected="selected"> </option>
-                                  <option>DEA1.1陽性</option>
-                                  <option>DEA1.1陰性</option>
-                                  <option>DEA1.2陽性</option>
-                                  <option>DEA1.2陰性</option>
-                                  <option>DEA3</option>
-                                  <option>DEA4</option>
-                                  <option>DEA5</option>
-                                  <option>DEA6</option>
-                                  <option>DEA7</option>
-                                  <option>DEA8</option>
+                                  <option disabled=disabled selected="selected">請先選擇種類</option>
                                 </select>
 
                                 <label for="inputPName1" class="col-lab-4 col-form-label ">特殊病史</label>
@@ -352,7 +347,6 @@
                               <thead>
                                 <tr class="table-warning">
                                   <td>會員編號</td>
-                                  <td>醫院名稱</td>
                                   <td>病歷號碼</td>
                                   <td>寵物名字</td>
                                   <td>寵物性別</td>
@@ -368,7 +362,6 @@
                                 @foreach($medicalrecord as $medicalrecords)
                                 <tr>
                                   <td>{{$medicalrecords->phonenumber}}</td>
-                                  <td>{{$medicalrecords->hospital}}</td>
                                   <td>{{$medicalrecords->medicalrecordnumber}}</td>
                                   <td>{{$medicalrecords->petname}}</td>
                                   <td>{{$medicalrecords->petgender}}</td>
@@ -436,23 +429,17 @@
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-      <div class="p-3">
-        <h5>Title</h5>
-        <p>Sidebar content</p>
-      </div>
-    </aside>
+
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        Anything you want
+        (NTOU-CSE-專題-Petemers團隊)
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2020 <a href="https://">Petemers</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2020 <a>Petemers</a>.</strong> All rights reserved.
     </footer>
   </div>
   <!-- ./wrapper -->
@@ -460,35 +447,35 @@
   <!-- REQUIRED SCRIPTS -->
 
   <!-- jQuery -->
-  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
-  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="../dist/js/adminlte.min.js"></script>
+  <script src="../../dist/js/adminlte.min.js"></script>
 
   <!-- jQuery -->
-  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
-  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Select2 -->
-  <script src="../plugins/select2/js/select2.full.min.js"></script>
+  <script src="../../plugins/select2/js/select2.full.min.js"></script>
   <!-- Bootstrap4 Duallistbox -->
-  <script src="../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+  <script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
   <!-- InputMask -->
-  <script src="../plugins/moment/moment.min.js"></script>
-  <script src="../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+  <script src="../../plugins/moment/moment.min.js"></script>
+  <script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
   <!-- date-range-picker -->
-  <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
   <!-- bootstrap color picker -->
-  <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+  <script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
   <!-- Tempusdominus Bootstrap 4 -->
-  <script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
   <!-- Bootstrap Switch -->
-  <script src="../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="../dist/js/adminlte.min.js"></script>
+  <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="../dist/js/demo.js"></script>
+  <script src="../../dist/js/demo.js"></script>
 
 </body>
 <!-- Page script -->
@@ -568,5 +555,29 @@
 
   })
 </script>
+
+
+<script>
+  breed = new Array();
+  breed[0] = ["米克斯","吉娃娃","約克夏","馬爾濟斯","蝴蝶犬","牧羊犬","巴哥犬","柴犬","柯基犬","臘腸犬","臺灣犬"];
+  breed[1] = ["亞洲貓","埃及貓","斯芬克斯貓","暹羅貓","孟加拉貓","美國短毛貓","蘇格蘭折耳貓","緬因貓","波斯貓"]; 
+  function renew(index) {
+    for (var i = 0; i < breed[index].length; i++)
+      document.medicalrecord.breed.options[i] = new Option(breed[index][i], breed[index][i]); // 設定新選項
+    document.medicalrecord.breed.length = breed[index].length; // 刪除多餘的選項
+  }
+</script>
+
+<script>
+  bloodtype = new Array();
+  bloodtype[0] = ["DEA1.1陽性","DEA1.1陰性","DEA1.2陽性","DEA1.2陰性","DEA3","DEA4","DEA5","DEA6","DEA7","DEA8"];
+  bloodtype[1] = ["A型","B型","AB型"]; 
+  function renew2(index) {
+    for (var i = 0; i < bloodtype[index].length; i++)
+      document.medicalrecord.bloodtype.options[i] = new Option(bloodtype[index][i], bloodtype[index][i]); // 設定新選項
+    document.medicalrecord.bloodtype.length = bloodtype[index].length; // 刪除多餘的選項
+  }
+</script>
+
 
 </html>

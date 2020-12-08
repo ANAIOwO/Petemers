@@ -16,7 +16,8 @@ class CreateUserpetsTable extends Migration
         Schema::create('userpets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('userid');
-            $table->string('petpicture')->default('default.jpg');
+            $table->string('phonenumber');
+            $table->binary('petpicture')->default('default.jpg');
             $table->string('petname');
             $table->string('petgender');
             $table->string('petsclass');

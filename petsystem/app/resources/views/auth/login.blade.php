@@ -51,15 +51,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <div class="col-md-5 offset-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('記住帳號') }}
-
-                                        </label>
-                                    </div>
-                                </div>
+                                <br>
                                 <button type="submit" class="loginbutton">
                                     {{ __('Login') }}
                                 </button>
@@ -81,12 +73,7 @@
                                 操作寵物系統的相關功能
                             </p>
                             <div class="form-group">
-                                <div class="offset-md-1">
-                                    @if (Route::has('password.request'))
-                                    <a class="butt" href="{{ route('password.request') }}">
-                                        {{ __('忘記密碼?') }}
-                                    </a>
-                                    @endif
+                                <div class="offset-md-1">                                    
                                     <br>
                                     <a class="butt" href="{{ url('/register') }}">註冊帳號</a>
                                     <br>

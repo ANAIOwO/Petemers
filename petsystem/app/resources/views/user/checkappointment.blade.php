@@ -21,43 +21,6 @@
     {{ session()->get('success') }}
   </div><br />
   @endif
-  <!--
-  <table class="table">
-    <thead>
-      <p>{{ Auth::user()->name }}</p>
-      <tr class="table-warning">
-        <td>ID</td>
-        <td>hospital</td>
-        <td>day</td>
-        <td>time</td>
-        <td>classification</td>
-        <td>petsclass</td>
-        <td>otherpets</td>
-        <td>petsgender</td>
-        <td>names</td>
-        <td>phonenumber</td>
-        <td>remark</td>
-        <td class="text-center">Action</td>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach($appointment as $appointments)
-      <tr>
-        <td>{{$appointments->id}}</td>
-        <td>{{$appointments->hospital}}</td>
-        <td>{{$appointments->day}}</td>
-        <td>{{$appointments->time}}</td>
-        <td>{{$appointments->classification}}</td>
-        <td>{{$appointments->petsclass}}</td>
-        <td>{{$appointments->otherpets}}</td>
-        <td>{{$appointments->petsgender}}</td>
-        <td>{{$appointments->names}}</td>
-        <td>{{$appointments->phonenumber}}</td>
-        <td>{{$appointments->remark}}</td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table> -->
 
   <section id="check">
     <div class="container my-3 py-5 text-center">
@@ -101,9 +64,9 @@
               @if(($appointments->petsclass) == "dog")
               <h5>寵物犬</h5>
               @elseif(($appointments->petsclass) == "cat")
-              <h5>寵物貓</h5> 
+              <h5>寵物貓</h5>
               @endif
-              
+
 
               @if(($appointments->petsgender) == "male")
               <h5>性別:公</h5>
@@ -114,7 +77,9 @@
               @endif
               <h5>掛號者/飼主:{{$appointments->names}}</h5>
               <h5>連絡電話:{{$appointments->phonenumber}}</h5>
-              <h5>備註:{{$appointments->remark}}</h5>
+              <div class="card-text">
+                <h5>備註:{{$appointments->remark}}</h5>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +87,7 @@
       </div>
     </div>
   </section>
+  <h1 style="text-align:center;">沒有更多資料了</h1>
 </div>
 
 @endsection

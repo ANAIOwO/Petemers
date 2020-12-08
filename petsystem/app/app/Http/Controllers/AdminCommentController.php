@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class AdminCommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+        //開啟授權，注意要開啟
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +50,18 @@ class AdminCommentController extends Controller
     public function store(Request $request)
     {
         //
+        $messages = [
+            "name.required" => "需填入留言者!",
+            "contact.required" => "需填入聯絡方式",
+            "comment.required" => "需填入留言訊息",
+            "comment.min" => "留言需大於兩個字"
+        ];
+
         $this->validate($request, array(
             'name' =>'required|max:255',
             'contact'=>'required|max:255',
-            'comment' => 'required|min:1|max:2000',
-        ));
+            'comment' => 'required|min:2|max:2000',
+        ), $messages);
 
         $comment = new AdminComments();
         $comment->name = $request->name;

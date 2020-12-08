@@ -26,12 +26,42 @@
               {{ session()->get('success') }}
             </div><br />
             @endif
+            <div class="content">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="col-12 col-xl-12" style="background-color:#C4C4C4;height:50px">
+                      <!-- SEARCH FORM -->
+                      <form class="form-inline ml-3 " method="GET" action="{{ url('searchuser')}}">
+                        <label for="inputName1" class="col-sm-4 col-form-label searchbar-mtop" style="font-size:20px">查詢病歷-查詢顧客電話:</label>
+                        <div class="input-group input-group-sm">
+                          <input type="search" class="form-control form-control-sm searchbar-mtop" placeholder="" name="searchnumber">
+                        </div>
+                        <div class="input-group-append">
+                          <button class="col-sm-1 btn btn-navbar searchbar-mtop" type="submit">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </form>
+                      <!-- /.SEARCH FORM -->
+                    </div>
+                    <!-- general form elements -->
+                    <!--
+              <button type="button" class="btn btn-block btn-overlay btn-outline-secondary btn-lg" onclick="window.location.href='/testcreate'" style="width:300px;color: #26416D; border-color: #26416D;margin-left:38%;margin-top:30%;">新增病歷</button>
+              -->
 
-            <table class="table" style="width:90%">
+                  </div>
+                  <!-- /.card -->
+                </div>
+                <!-- /.col-md-6 -->
+              </div>
+              <!-- /.row -->
+            </div><!-- /.container-fluid -->
+            <table class="table" style="width:100%">
               <thead>
                 <tr class="table-warning">
                   <td>會員編號</td>
-                  <td>醫院名稱</td>
+                  <td>建立病歷醫院</td>
                   <td>病歷號碼</td>
                   <td>寵物名字</td>
                   <td>寵物性別</td>
@@ -72,6 +102,7 @@
                 @endforeach
               </tbody>
             </table>
+            <h2 style="text-align:center;">以上是此家醫院建立之病歷資料</h2>
           </div>
         </div>
       </div>

@@ -18,7 +18,8 @@ class userpetsController extends Controller
      */
     public function index()
     {
-        $userpet = userpets::all();
+        //$userpet = userpets::all();
+        $userpet = DB::table('userpets')->where('phonenumber', 'LIKE', Auth::user()->phonenumber )->get();
         return view('user/checkuserpet', compact('userpet'));
     }
 
@@ -40,19 +41,26 @@ class userpetsController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            "petname.required" => "需要填寫寵物名字",
+            "petsclass.required" => "需要選擇種類",
+            "fix.required" => "需要選擇結紮狀況",
+            "chipnumber.required" => "需要輸入晶片號碼"
+        ];
+
         $request->validate([
             'petpicture' => 'image|max:2048',
             'petname' => 'required|max:255',
             'petgender' => 'max:255',
             'petsclass' => 'required|max:255',
-            'chipnumber' => 'max:255',
+            'chipnumber' => 'required|max:255',
             'petbirthday' => 'max:255',
             'breed' => 'max:255',
             'rabiesid' => 'max:255',
             'bloodtype' => 'max:255',
-            'fix' => 'max:255',
+            'fix' => 'required|max:255',
             'specialmedicalhistory' => 'max:255',
-        ]);
+        ], $messages);
 
         $image_file = $request->file('petpicture');
         
@@ -110,8 +118,9 @@ class userpetsController extends Controller
      */
     public function edit($id)
     {
-        $userpet = userpets::findOrFail($id);
-        return view('user/edituserpet', compact('userpet'));
+        //$userpet = userpets::findOrFail($id);
+        //return view('user/edituserpet', compact('userpet'));
+        return redirect('home');
     }
 
     /**
@@ -123,6 +132,7 @@ class userpetsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*
         $updateData = $request->validate([
             'petname' => 'required|max:255',
             'petgender' => 'max:255',
@@ -137,6 +147,7 @@ class userpetsController extends Controller
         ]);
         userpets::whereId($id)->update($updateData);
         return redirect('/checkuserpet');
+        */
     }
 
     /**
